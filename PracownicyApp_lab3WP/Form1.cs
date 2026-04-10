@@ -3,16 +3,40 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
+using System.Xml.Serialization;
 
 namespace PracownicyApp_lab3WP
 {
     public partial class Form1 : Form
     {
+        public List<Osoba> GetOsobyFromGrid()
+        {
+            List<Osoba> lista = new List<Osoba>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    Osoba o = new Osoba
+                    {
+                        ID = Convert.ToInt32(row.Cells["ID"].Value),
+                        Imie = row.Cells["Imie"].Value?.ToString(),
+                        Nazwisko = row.Cells["Nazwisko"].Value?.ToString(),
+                        Wiek = Convert.ToInt32(row.Cells["Wiek"].Value),
+                        Stanowisko = row.Cells["Stanowisko"].Value?.ToString()
+                    };
+
+                    lista.Add(o);
+                }
+            }
+
+            return lista;
+        }
         public Form1()
         {
             InitializeComponent();
@@ -79,6 +103,24 @@ namespace PracownicyApp_lab3WP
                 {
                     var values = line.Split(',');
                     dataGridView1.Rows.Add(values);
+                }
+            }
+        }
+
+        private void btnXML_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog s = new SaveFileDialog();
+            s.Filter = "XML|*.xml";
+
+            if (s.ShowDialog() == DialogResult.OK)
+            {
+                var lista = GetOsobyFromGrid();
+
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Osoba>));
+
+                using (TextWriter writer = new StreamWriter(s.FileName))
+                {
+                    serializer.Serialize(writer, lista);
                 }
             }
         }
