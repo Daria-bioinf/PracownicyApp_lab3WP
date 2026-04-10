@@ -34,6 +34,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.btnXML = new System.Windows.Forms.Button();
+            this.butnJSON = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,11 +99,22 @@
             this.btnXML.UseVisualStyleBackColor = true;
             this.btnXML.Click += new System.EventHandler(this.btnXML_Click);
             // 
+            // butnJSON
+            // 
+            this.butnJSON.Location = new System.Drawing.Point(456, 301);
+            this.butnJSON.Name = "butnJSON";
+            this.butnJSON.Size = new System.Drawing.Size(172, 44);
+            this.butnJSON.TabIndex = 6;
+            this.butnJSON.Text = "Zapis do JSON";
+            this.butnJSON.UseVisualStyleBackColor = true;
+            this.butnJSON.Click += new System.EventHandler(this.butnJSON_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(679, 430);
+            this.Controls.Add(this.butnJSON);
             this.Controls.Add(this.btnXML);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -124,6 +136,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnXML;
+        private System.Windows.Forms.Button butnJSON;
     }
 }
 

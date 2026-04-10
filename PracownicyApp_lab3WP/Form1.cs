@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Text.Json;
 
 namespace PracownicyApp_lab3WP
 {
@@ -122,6 +123,26 @@ namespace PracownicyApp_lab3WP
                 {
                     serializer.Serialize(writer, lista);
                 }
+            }
+        }
+
+        private void butnJSON_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog s = new SaveFileDialog();
+            s.Filter = "JSON|*.json";
+
+            if (s.ShowDialog() == DialogResult.OK)
+            {
+                var lista = GetOsobyFromGrid();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+
+                string json = JsonSerializer.Serialize(lista, options);
+
+                File.WriteAllText(s.FileName, json);
             }
         }
     }
